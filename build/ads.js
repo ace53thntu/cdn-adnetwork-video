@@ -1,56 +1,58 @@
-/**
- * Returns a regular expression to test a string for the given className.
- *
- * @param {string} className The name of the class.
- * @return {RegExp} The regular expression used to test for that class.
- */
-var getClassRegexp = function (className) {
-  // Matches on
-  // (beginning of string OR NOT word char)
-  // classname
-  // (negative lookahead word char OR end of string)
-  return new RegExp("(^|[^A-Za-z-])" + className + "((?![A-Za-z-])|$)", "gi");
-};
+var Application = function (vastTag, width, height) {
+  if (!vastTag || !width || !height) return;
 
-/**
- * Adds a class to the given element if it doesn't already have the class
- * @param {HTMLElement} element Element to which the class will be added.
- * @param {string} classToAdd Class to add.
- */
-var addClass = function (element, classToAdd) {
-  element.className = element.className.trim() + " " + classToAdd;
-};
+  /**
+   * Returns a regular expression to test a string for the given className.
+   *
+   * @param {string} className The name of the class.
+   * @return {RegExp} The regular expression used to test for that class.
+   */
+  var getClassRegexp = function (className) {
+    // Matches on
+    // (beginning of string OR NOT word char)
+    // classname
+    // (negative lookahead word char OR end of string)
+    return new RegExp("(^|[^A-Za-z-])" + className + "((?![A-Za-z-])|$)", "gi");
+  };
 
-/**
- * Removes a class from the given element if it has the given class
- *
- * @param {HTMLElement} element Element from which the class will be removed.
- * @param {string} classToRemove Class to remove.
- */
-var removeClass = function (element, classToRemove) {
-  const classRegexp = getClassRegexp(classToRemove);
-  element.className = element.className.trim().replace(classRegexp, "");
-};
+  /**
+   * Adds a class to the given element if it doesn't already have the class
+   * @param {HTMLElement} element Element to which the class will be added.
+   * @param {string} classToAdd Class to add.
+   */
+  var addClass = function (element, classToAdd) {
+    element.className = element.className.trim() + " " + classToAdd;
+  };
 
-/**
- * Returns whether or not the provided element has the provied class in its
- * className.
- * @param {HTMLElement} element Element to tes.t
- * @param {string} className Class to look for.
- * @return {boolean} True if element has className in class list. False
- *     otherwise.
- */
-var elementHasClass = function (element, className) {
-  const classRegexp = getClassRegexp(className);
-  return classRegexp.test(element.className);
-};
+  /**
+   * Removes a class from the given element if it has the given class
+   *
+   * @param {HTMLElement} element Element from which the class will be removed.
+   * @param {string} classToRemove Class to remove.
+   */
+  var removeClass = function (element, classToRemove) {
+    const classRegexp = getClassRegexp(classToRemove);
+    element.className = element.className.trim().replace(classRegexp, "");
+  };
 
-/**
- * Constants
- */
-var adContainer = "adContainer";
+  /**
+   * Returns whether or not the provided element has the provied class in its
+   * className.
+   * @param {HTMLElement} element Element to tes.t
+   * @param {string} className Class to look for.
+   * @return {boolean} True if element has className in class list. False
+   *     otherwise.
+   */
+  var elementHasClass = function (element, className) {
+    const classRegexp = getClassRegexp(className);
+    return classRegexp.test(element.className);
+  };
 
-window.onload = function () {
+  /**
+   * Constants
+   */
+  var adContainer = "adContainer";
+
   var autoplayAllowed = false;
   var autoplayRequiresMute = false;
   var adDisplayContainer;
@@ -101,16 +103,15 @@ window.onload = function () {
   function autoplayChecksResolved() {
     // Request video ads.
     var adsRequest = new google.ima.AdsRequest();
-    adsRequest.adTagUrl =
-      "https://staging-adnetwork-adserver.aicactus.io/serve-bid-video/oXBcXZie5x0taIrERZVOQp6cFiS2f-DEy4o2jXk1I5PRpiB57YKCVi1XcbJPDiPlDM7gwkEDQdxLDI_ay2rQNxFgsD9Iub18z6sy75W1BZUoJRUfJwK-Rrhf0an_waXH97QN7T8qwmSpuAClof1vGEJgL3g0ZC867QybRtySDYjvj4Gk8Be6mi3ohn7F7DKerZZJaibmFjcXVAoJSYJlrwWdk4dg4PYbCYtLudZWXCI=.xml?rp={{AUCTION_PRICE}}&gdpr_consent=${GDPR_CONSENT_234}";
+    adsRequest.adTagUrl = vastTag;
 
     // Specify the linear and nonlinear slot sizes. This helps the SDK to
     // select the correct creative if multiple are returned.
-    adsRequest.linearAdSlotWidth = 640;
-    adsRequest.linearAdSlotHeight = 400;
+    adsRequest.linearAdSlotWidth = width;
+    adsRequest.linearAdSlotHeight = height;
 
-    adsRequest.nonLinearAdSlotWidth = 640;
-    adsRequest.nonLinearAdSlotHeight = 150;
+    // adsRequest.nonLinearAdSlotWidth = 640;
+    // adsRequest.nonLinearAdSlotHeight = 150;
 
     adsRequest.setAdWillAutoPlay(autoplayAllowed);
     adsRequest.setAdWillPlayMuted(autoplayRequiresMute);
@@ -167,7 +168,6 @@ window.onload = function () {
   }
 
   function onAdEvent(adEvent) {
-    console.log("🚀 ~ file: ads1.js ~ line 153 ~ onAdEvent ~ adEvent", adEvent);
     // Retrieve the ad from the event. Some events (e.g. ALL_ADS_COMPLETED)
     // don't have ad object associated.
     var ad = adEvent.getAd();
@@ -258,7 +258,7 @@ window.onload = function () {
         adsInitialized = true;
       }
       // Initialize the ads manager. Ad rules playlist will start at this time.
-      adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+      adsManager.init(width, height, google.ima.ViewMode.NORMAL);
       // adsManager.init(1600, 900, google.ima.ViewMode.FULLSCREEN);
       // Call play to start showing the ad. Single video and overlay ads will
       // start at this time; the call will be ignored for ad rules.
@@ -487,7 +487,6 @@ window.onload = function () {
         document.documentElement.requestFullScreen ||
         document.documentElement.webkitRequestFullScreen ||
         document.documentElement.mozRequestFullScreen;
-      console.log("---requestFullscreen: ", requestFullscreen);
       if (requestFullscreen) {
         fullscreenWidth = window.screen.width;
         fullscreenHeight = window.screen.height;
@@ -503,9 +502,9 @@ window.onload = function () {
 
   function onFullscreenChange() {
     if (isFullscreen) {
-      adsManager.resize(640, 360, google.ima.ViewMode.NORMAL);
+      adsManager.resize(width, height, google.ima.ViewMode.NORMAL);
       isFullscreen = false;
-      updateAdContainerStyle(640, 360);
+      updateAdContainerStyle(width, height);
     } else {
       makeAdsFullscreen();
       isFullscreen = true;
