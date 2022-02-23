@@ -1,4 +1,4 @@
-var Application = function (vastTag, width, height) {
+var Application = function (vastTag, width, height, iframe) {
   if (!vastTag || !width || !height) return;
 
   /**
@@ -185,6 +185,10 @@ var Application = function (vastTag, width, height) {
         }
         adsManager.destroy();
         hideAdContainer();
+        if (iframe) {
+          iframe.style.display = "none";
+        }
+
         break;
     }
   }
