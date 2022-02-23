@@ -1,4 +1,4 @@
-var Application = function (vastTag, width, height, iframe) {
+var Application = function (vastTag, width, height, placementId) {
   if (!vastTag || !width || !height) return;
 
   /**
@@ -185,11 +185,12 @@ var Application = function (vastTag, width, height, iframe) {
         }
         adsManager.destroy();
         hideAdContainer();
-        if (iframe) {
-          console.log("---iframe: ", iframe);
-          // iframe.style.display = "none";
+        if (placementId) {
+          const parentIframe = document.querySelector(
+            "#" + placementId + ">iframe"
+          );
+          parentIframe.style.display = "none";
         }
-
         break;
     }
   }
