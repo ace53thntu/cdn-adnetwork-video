@@ -1,4 +1,4 @@
-var Application = function (vastTag, width, height, placementId) {
+var Application = function (vastTag, width, height, hideIframe) {
   if (!vastTag || !width || !height) return;
 
   /**
@@ -185,11 +185,8 @@ var Application = function (vastTag, width, height, placementId) {
         }
         adsManager.destroy();
         hideAdContainer();
-        if (placementId) {
-          const parentIframe = document.querySelector(
-            "#" + placementId + ">iframe"
-          );
-          parentIframe.style.display = "none";
+        if (hideIframe) {
+          hideIframe();
         }
         break;
     }
