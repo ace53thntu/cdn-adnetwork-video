@@ -186,6 +186,7 @@ var Application = function (vastTag, width, height, iframe) {
         adsManager.destroy();
         hideAdContainer();
         if (iframe) {
+          console.log("---iframe: ", iframe);
           iframe.style.display = "none";
         }
 
