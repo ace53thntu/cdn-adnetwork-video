@@ -154,8 +154,6 @@ var Application = function (vastTag, width, height, hideIframe) {
     console.log(adErrorEvent.getError());
     adsManager.destroy();
     hideAdContainer();
-    // Fall back to playing content.
-    // videoContent.play();
   }
 
   function onContentPauseRequested() {
@@ -254,8 +252,7 @@ var Application = function (vastTag, width, height, hideIframe) {
     if (autoplayAllowed) {
       playAds();
     } else {
-      //
-      // playButton.style.display = "block";
+      // showAdControls();
     }
   }
 
@@ -267,7 +264,6 @@ var Application = function (vastTag, width, height, hideIframe) {
       }
       // Initialize the ads manager. Ad rules playlist will start at this time.
       adsManager.init(width, height, google.ima.ViewMode.NORMAL);
-      // adsManager.init(1600, 900, google.ima.ViewMode.FULLSCREEN);
       // Call play to start showing the ad. Single video and overlay ads will
       // start at this time; the call will be ignored for ad rules.
       adsManager.start();
@@ -280,7 +276,6 @@ var Application = function (vastTag, width, height, hideIframe) {
       }
     } catch (adError) {
       // An error may be thrown if there was a problem with the VAST response.
-      // videoContent.play();
       playing = false;
     }
   }
