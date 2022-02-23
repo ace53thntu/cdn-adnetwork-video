@@ -185,9 +185,13 @@ var Application = function (vastTag, width, height, hideIframe) {
         }
         adsManager.destroy();
         hideAdContainer();
-        if (hideIframe) {
-          hideIframe();
-        }
+
+        window.parent.postMessage(
+          {
+            type: "ALL_ADS_COMPLETED",
+          },
+          "*"
+        );
         break;
     }
   }
