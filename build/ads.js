@@ -153,6 +153,7 @@ var Application = function (vastTag, width, height, hideIframe) {
     // Handle the error logging.
     console.log(adErrorEvent.getError());
     adsManager.destroy();
+    hideAdContainer();
     // Fall back to playing content.
     // videoContent.play();
   }
