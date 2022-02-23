@@ -1,4 +1,5 @@
 var Application = function (vastTag, width, height, hideIframe) {
+  hideAdContainer();
   if (!vastTag || !width || !height) return;
 
   /**
