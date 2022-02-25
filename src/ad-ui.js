@@ -344,6 +344,12 @@ AdUi.prototype.onAdsPlaying = function () {
 AdUi.prototype.onAllAdsCompleted = function () {
   this.controller.reset();
   this.hideAdContainer();
+  window.parent.postMessage(
+    {
+      type: "ALL_ADS_COMPLETED",
+    },
+    "*"
+  );
 };
 
 /**
