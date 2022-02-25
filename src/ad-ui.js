@@ -343,7 +343,7 @@ AdUi.prototype.onAdsPlaying = function () {
  */
 AdUi.prototype.onAllAdsCompleted = function () {
   this.controller.reset();
-  this.hideAdContainer();
+  // this.hideAdContainer();
   window.parent.postMessage(
     {
       type: "ALL_ADS_COMPLETED",
@@ -425,6 +425,7 @@ AdUi.prototype.onAdError = function () {
  * Hide the ad container
  */
 AdUi.prototype.hideAdContainer = function () {
+  console.log("hideAdContainer");
   this.adContainerDiv.style.display = "none";
 };
 
