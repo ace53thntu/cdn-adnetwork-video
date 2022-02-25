@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>Aicactus SDK - Adnetwork video ads</title>
+  <link rel="stylesheet" type="text/css" href="video-sdk-ima.min.css">
+</head>
+
+<body>
+  <div id="adContainer" style="width: 640px;height: 360px;">
+    <div id="ima-controls-div" class="ima-controls-div">
+      <div id="ima-countdown-div" class=" ima-countdown-div"></div>
+      <div id="ima-seek-bar-div" class="ima-seek-bar-div">
+        <div id="ima-progress-div" class=" ima-progress-div">
+        </div>
+      </div>
+      <div id="ima-play-pause-div" class="ima-play-pause-div"></div>
+      <div id="ima-mute-div" class="ima-mute-div"></div>
+      <div id="ima-slider-div" class="ima-slider-div">
+        <div id="ima-slider-level-div" class="ima-slider-level-div" style="width: 0%;"></div>
+      </div>
+      <div id="ima-fullscreen-div" class="ima-fullscreen-div"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script type="text/javascript" src="video-sdk-ima.min.js"></script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      const SDK = window['video-sdk-ima'];
+      SDK.init({ vastTag: 'https://staging-adnetwork-adserver.aicactus.io/serve-bid-video/oXBcXZie5x0taIrERZVOQp6cFiS2f-DEy4o2jXk1I5PRpiB57YKCVi1XcbJPDiPlDM7gwkEDQdxLDI_ay2rQNxFgsD9Iub18z6sy75W1BZUoJRUfJwK-Rrhf0an_waXH97QN7T8qwmSpuAClof1vGEJgL3g0ZC867QybRtySDYjvj4Gk8Be6mi3ohn7F7DKerZZJaibmFjcXVAoJSYJlrwWdk4dg4PYbCYtLudZWXCI=.xml?rp={{AUCTION_PRICE}}&gdpr_consent=${GDPR_CONSENT_234}', width: 640, height: 360 })
+    })
+
+  </script>
+</body>
+
+</html>
