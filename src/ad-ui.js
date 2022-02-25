@@ -266,9 +266,6 @@ AdUi.prototype.onAdFullscreenClick = function () {
  * @param {number} height - height for ads container
  */
 AdUi.prototype.setAdContainerSize = function (width, height) {
-  console.log("🚀 ~ file: ad-ui.js ~ line 220 ~ height", height);
-  console.log("🚀 ~ file: ad-ui.js ~ line 220 ~ width", width);
-
   this.adContainerDiv.style.width = width;
   this.adContainerDiv.style.height = height;
 };
@@ -345,8 +342,8 @@ AdUi.prototype.onAdsPlaying = function () {
  * Handles when all ads have finished playing.
  */
 AdUi.prototype.onAllAdsCompleted = function () {
-  // this.controller.reset();
-  // this.hideAdContainer();
+  this.controller.reset();
+  this.hideAdContainer();
 };
 
 /**
